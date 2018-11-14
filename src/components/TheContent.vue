@@ -1,3 +1,10 @@
 <template>
-  <h4>Content</h4>
+  <div class="container">
+    <router-view></router-view>
+  </div>
 </template>
+<script>
+export default {
+
+};
+</script>
