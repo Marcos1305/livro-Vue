@@ -15,6 +15,29 @@
       >
       <i class="material-icons right">Count Users</i>
     </a>
+    <table class="highlight striped">
+      <thead>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Pais</th>
+        <th>Ações</th>
+      </thead>
+      <tbody>
+        <tr v-for="(user, index) in users" :key="index">
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.country }}</td>
+          <td>
+            <button
+              @click="deleteUser(user.id)"
+              class="btn"
+              >
+                Deletar
+              </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 <script>
@@ -26,15 +49,28 @@ export default {
   },
   methods: {
     callUsers() {
-      this.$http({ url: 'users.json', method: 'GET' })
-        .then(function (response) {
-          this.users = response.data;
+      this.$http
+        .get('http://localhost:3000/users')
+        .then((res) => {
+          console.log(res.body);
+          this.users = res.body;
         })
-        .catch(() => alert('Erro'));
+        .catch((err) => {
+          console.log(err.message);
+        });
     },
     countUsers() {
-      alert(this.users.length);
+      return 'oi';
     },
+    deleteUser(id) {
+      const deleteUser = window.confirm('Deseja realmente deletar o usuário?');
+      deleteUser && this.$http
+        .delete(`http://localhost:3000/users/${id}`)
+        .then(() => {
+          const newUsers = this.users.filter(user => user.id !== id);
+          this.users = newUsers;
+        });
+    }
   },
 };
 </script>

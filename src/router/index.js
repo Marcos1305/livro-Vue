@@ -16,15 +16,10 @@ export default new Router({
     {
       path: '/card',
       component: Card,
-      auth: true,
     },
     {
       path: '/buttons',
       component: Buttons,
-    },
-    {
-      path: '*',
-      redirect: { name: 'index' },
     },
   ],
   mode: 'history',

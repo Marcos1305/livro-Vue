@@ -3,11 +3,14 @@
 import materialize from 'materialize-css';
 import VueResouce from 'vue-resource';
 import 'materialize-css/dist/css/materialize.min.css';
+import http from '@/core/Http';
 import Vue from 'vue';
 import App from './App';
 import router from './router';
 
 Vue.prototype.$materialize = materialize;
+Vue.prototype.$http = http;
+
 Vue.use(VueResouce);
 Vue.config.productionTip = false;
 
